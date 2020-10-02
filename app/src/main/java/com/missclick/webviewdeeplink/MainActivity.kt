@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity(),SensorEventListener {
         xy_angle = event!!.values[0]; //Плоскость XY
         xz_angle = event!!.values[1]; //Плоскость XZ
         zy_angle = event!!.values[2]; //Плоскость ZY
-        Log.e("xy",xy_angle.toString())
-        Log.e("xz",xz_angle.toString())
-        Log.e("zy",zy_angle.toString())
+//        Log.e("xy",xy_angle.toString())
+//        Log.e("xz",xz_angle.toString())
+//        Log.e("zy",zy_angle.toString())
     }
 
 

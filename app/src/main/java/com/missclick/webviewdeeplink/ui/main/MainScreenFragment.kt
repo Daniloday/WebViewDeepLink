@@ -33,10 +33,11 @@ class MainScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.simpleLiveData.observe(viewLifecycleOwner, Observer {
-            Log.e("Main", it.error.toString())
-        })
-        viewModel.getUsers(1)
+        viewModel.okHttp()
+//        viewModel.simpleLiveData.observe(viewLifecycleOwner, Observer {
+//            Log.e("Main", it.error.toString())
+//        })
+//        viewModel.getUsers(1)
     }
 
 

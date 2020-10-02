@@ -12,12 +12,12 @@ object NetworkService {
     private const val BASE_URL = " http://www.mocky.io/v2/"
 
     // HttpLoggingInterceptor выводит подробности сетевого запроса в логи
-    private val loggingInterceptor = run {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.apply {
-            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        }
-    }
+//    private val loggingInterceptor = run {
+//        val httpLoggingInterceptor = HttpLoggingInterceptor()
+//        httpLoggingInterceptor.apply {
+//            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+//        }
+//    }
 
     private val baseInterceptor: Interceptor = invoke { chain ->
         val newUrl = chain
@@ -37,7 +37,7 @@ object NetworkService {
 
     private val client: OkHttpClient = OkHttpClient
         .Builder()
-        .addInterceptor(loggingInterceptor)
+        //.addInterceptor(loggingInterceptor)
         .addInterceptor(baseInterceptor)
         .build()
 

@@ -17,7 +17,6 @@ class FbHelp(val context: Context) {
                     //Msg().messageSchedule(context)
                     Log.e("DEEP", "SRABOTAL")
                     val tree = appLinkData.argumentBundle["target_url"].toString()
-
                 }
             }
         }

@@ -48,4 +48,6 @@ dependencies {
 
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
 
+    implementation 'com.appsflyer:af-android-sdk:5.2.0'
+
 }

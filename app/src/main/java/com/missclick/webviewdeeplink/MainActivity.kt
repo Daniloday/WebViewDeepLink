@@ -11,21 +11,23 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import com.missclick.webviewdeeplink.data.FbHelp
+import android.app.Application;
+import com.appsflyer.AppsFlyerLib;
+import com.appsflyer.AppsFlyerConversionListener;
+import com.appsflyer.AppsFlyerLibCore.LOG_TAG
+import java.util.Map;
 
 
 class MainActivity : AppCompatActivity(),SensorEventListener {
 
 
     private var sensorManager: SensorManager? = null
-//    private var accelData: MutableList<Float>? = null
 
     private var xy_angle = 0f
     private var xz_angle = 0f
     private var zy_angle = 0f
 
-//    private var xyView: TextView? = null
-//    private var xzView: TextView? = null
-//    private var zyView: TextView? = null
+    private val devKey = "pP55HP9udtdDHpXaPzNDyF"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,34 @@ class MainActivity : AppCompatActivity(),SensorEventListener {
         val fb = FbHelp(this).tree()
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         navController.navigate(R.id.mainScreenFragment)
+
+        val conversionDataListener  = object : AppsFlyerConversionListener{
+            override fun onConversionDataSuccess(data: MutableMap<String, Any>?) {
+                data?.let { cvData ->
+                    cvData.map {
+                        Log.i(LOG_TAG, "conversion_attribute:  ${it.key} = ${it.value}")
+                    }
+                }
+            }
+
+            override fun onConversionDataFail(error: String?) {
+                Log.e(LOG_TAG, "error onAttributionFailure :  $error")
+            }
+
+            override fun onAppOpenAttribution(data: MutableMap<String, String>?) {
+                data?.map {
+                    Log.d(LOG_TAG, "onAppOpen_attribute: ${it.key} = ${it.value}")
+                }
+            }
+
+            override fun onAttributionFailure(error: String?) {
+                Log.e(LOG_TAG, "error onAttributionFailure :  $error")
+            }
+        }
+        Log.e("DickPick",conversionDataListener.toString())
+
+        AppsFlyerLib.getInstance().init(devKey, conversionDataListener, this)
+        AppsFlyerLib.getInstance().startTracking(this)
     }
 
     override fun onAccuracyChanged(
@@ -58,6 +88,8 @@ class MainActivity : AppCompatActivity(),SensorEventListener {
 //        Log.e("xz",xz_angle.toString())
 //        Log.e("zy",zy_angle.toString())
     }
+
+
 
 
 
